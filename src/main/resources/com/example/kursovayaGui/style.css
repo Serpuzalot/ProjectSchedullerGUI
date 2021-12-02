@@ -1,9 +1,0 @@
-.startButton{
-    -fx-text-fill: white;
-    -fx-alignment: center;
-    position: center;
-    width: 40px;
-    height: 40px;
-    background: black;
-    border-radius: 8px;
-}
