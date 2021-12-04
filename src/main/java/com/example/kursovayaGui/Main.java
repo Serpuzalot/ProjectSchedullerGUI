@@ -7,22 +7,30 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class Main extends javafx.application.Application {
+public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("schedullerView.fxml"));
+        /*Parent root = FXMLLoader.load(getClass().getResource("schedullerView.fxml"));
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         stage.setTitle("Scheduler");
         stage.setScene(scene);
+        stage.show();*/
+        Parent root = FXMLLoader.load(getClass().getResource("configurationView.fxml"));
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+        stage.setTitle("Configuration");
+        stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
 
-        launch(args);
+        launch(args);//запуск JavaFx
         System.exit(0);
     }
 }

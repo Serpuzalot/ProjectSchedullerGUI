@@ -2,6 +2,7 @@ package com.example.kursovayaGui.company.classes;
 
 import com.example.kursovayaGui.company.interfaces.Queue;
 
+import java.lang.invoke.VarHandle;
 import java.util.ArrayList;
 
 public class ProcessQueue implements Queue,Runnable {
@@ -42,6 +43,8 @@ public class ProcessQueue implements Queue,Runnable {
     }
 
     public Process getHighPriorityProcess(){
+        //получает процесс с наивысшим приоритетом и статусом Готов
+        //наивысший приоритет 1
         Process process = new Process();
         for(int i =0;i<queue.size();i++){
             synchronized (queue){
@@ -110,8 +113,8 @@ public class ProcessQueue implements Queue,Runnable {
 
     }
 
-    public static void shutDown(){
-        shutDown = true;
+    public static void setShutDown(boolean value){
+        shutDown = value;
     }
 
     public String toString(String whatsQueue) {

@@ -41,6 +41,10 @@ public class Core {
         this.burstTime=burstTime;
     }
 
+    public int getCoreID() {
+        return coreID;
+    }
+
     @Override
     public String toString(){
         return "Core[" + coreID + "] isFree[" + isFree + "] processID[" + processID + "] BurstTime["+burstTime+"]";

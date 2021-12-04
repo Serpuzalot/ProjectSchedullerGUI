@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane prefWidth="600" prefHeight="500" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kursovayaGui.ConfigurationViewController" >
+    <rowConstraints>
+        <RowConstraints prefHeight="100"/>
+        <RowConstraints prefHeight="100"/>
+        <RowConstraints prefHeight="200"/>
+        <RowConstraints prefHeight="100"/>
+    </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints prefWidth="200" />
+        <ColumnConstraints prefWidth="200"/>
+        <ColumnConstraints prefWidth="200"/>
+    </columnConstraints>
+
+    <GridPane GridPane.rowIndex="0" GridPane.columnIndex="0">
+        <columnConstraints>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="25" />
+            <RowConstraints prefHeight="75"/>
+        </rowConstraints>
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" >Объем ОЗУ</Label>
+        <TextField prefWidth="180"  fx:id="memoryVolumeField" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"></TextField>
+        <GridPane.margin><Insets left="5"></Insets></GridPane.margin>
+    </GridPane>
+
+    <GridPane GridPane.rowIndex="0" GridPane.columnIndex="1">
+        <columnConstraints>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="25" />
+            <RowConstraints prefHeight="75"/>
+        </rowConstraints>
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">Место под ОС</Label>
+        <TextField prefWidth="180" fx:id="OSmemoryField" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"></TextField>
+        <GridPane.margin><Insets left="5"></Insets></GridPane.margin>
+    </GridPane>
+
+    <GridPane GridPane.rowIndex="0" GridPane.columnIndex="2">
+        <columnConstraints>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="25" />
+            <RowConstraints prefHeight="75"/>
+        </rowConstraints>
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">Макс время работы процесса</Label>
+        <TextField prefWidth="180" fx:id="maxProcessWorkedField" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"></TextField>
+    </GridPane>
+
+    <GridPane GridPane.rowIndex="1" GridPane.columnIndex="0">
+        <columnConstraints>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="25" />
+            <RowConstraints prefHeight="75"/>
+        </rowConstraints>
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">Колличество приоритетов</Label>
+        <TextField prefWidth="180" fx:id="priorityQuantityField" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"></TextField>
+        <GridPane.margin><Insets left="5"></Insets></GridPane.margin>
+    </GridPane>
+
+    <GridPane GridPane.rowIndex="1" GridPane.columnIndex="1">
+        <columnConstraints>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="25" />
+            <RowConstraints prefHeight="75"/>
+        </rowConstraints>
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">Колличесвто ядер</Label>
+        <TextField prefWidth="180" fx:id="coreQuantityField" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"></TextField>
+        <GridPane.margin><Insets left="5"></Insets></GridPane.margin>
+    </GridPane>
+
+    <GridPane GridPane.rowIndex="1" GridPane.columnIndex="2">
+        <columnConstraints>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="25" />
+            <RowConstraints prefHeight="75"/>
+        </rowConstraints>
+        <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">Задержка за один такс(мс)</Label>
+        <TextField prefWidth="180" fx:id="cpuSleepField" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"></TextField>
+    </GridPane>
+
+    <Button fx:id="submitButton" onAction="#handelSubmitBtn" prefWidth="80" prefHeight="20" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER">Submit!</Button>
+    <GridPane prefHeight="80" prefWidth="100" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="3"  GridPane.halignment="CENTER">
+        <rowConstraints>
+            <RowConstraints prefHeight="25"/>
+            <RowConstraints prefHeight="50"/>
+        </rowConstraints>
+        <columnConstraints>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <Label GridPane.halignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0" >Errors:
+            <GridPane.margin><Insets left="250"></Insets></GridPane.margin></Label>
+        <TextArea  fx:id="errorField" GridPane.halignment="CENTER" prefWidth="100" GridPane.rowIndex="1" GridPane.columnIndex="0" >
+            <GridPane.margin><Insets left="250"></Insets></GridPane.margin>
+        </TextArea>
+    </GridPane>
+
+</GridPane>

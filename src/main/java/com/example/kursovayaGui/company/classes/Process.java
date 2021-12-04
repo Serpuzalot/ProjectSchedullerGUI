@@ -5,17 +5,16 @@ public class Process {
     private int id;
     private String name;
     private int priority;
-    private int time;
     private int memory;
     private int timeIn;
     private int burstTime;
     State state;
 
     public Process(){
-        this.memory = Utils.getRandomInteger(10,Configuration.memoryVolume/2);
+        this.memory = Utils.getRandomInteger(10,Configuration.memoryVolume/3);
         this.priority = Utils.getRandomInteger(1,Configuration.maxPriority);
         this.timeIn = ClockGenerator.getTime();
-        this.burstTime = Utils.getRandomInteger(10,30);
+        this.burstTime = Utils.getRandomInteger(1,Configuration.maxProcessWorked);
         this.state = State.Ready;
     }
 
@@ -27,15 +26,6 @@ public class Process {
         this.timeIn = timeIn;
         this.burstTime = burstTime;
         this.state = state;
-    }
-    public Process(int id) {
-        this.id = id;
-        this.name = "P"+this.id;
-        this.memory = Utils.getRandomInteger(10,Math.round(Configuration.memoryVolume/3));
-        this.priority = Utils.getRandomInteger(1,Configuration.maxPriority);
-        this.timeIn = ClockGenerator.getTime();
-        this.burstTime = Utils.getRandomInteger(10,30);
-        this.state = State.Ready;
     }
 
     public Process(String name,int id){

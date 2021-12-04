@@ -2,6 +2,9 @@ package com.example.kursovayaGui.company.classes;
 
 public class Configuration {
     public static int memoryVolume ;
-    public static final int osMemoryVolume = 128;
-    public static final int maxPriority = 31;
+    public static int osMemoryVolume ;
+    public static int maxPriority ;
+    public static int maxProcessWorked;
+    public static int coreQuantity;
+    public static int cpuSleapField;
 }

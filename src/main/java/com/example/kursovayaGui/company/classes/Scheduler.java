@@ -7,12 +7,13 @@ public class Scheduler implements Runnable {
     RejectQueue rejectQueue;
     CPU cpu;
     MemoryScheduler memoryScheduler;
-    volatile boolean shutDown;
+     static volatile boolean shutDown;
 
     public Scheduler(final int cpuCoresNumber,int memoryVolume) {
         new Thread(new ClockGenerator()).start();
+        //запуск в отдельном потоке счетчика,отсчитывает секунды со старта программы
         this.queue = new ProcessQueue();
-        new Thread(queue).start();
+        new Thread(queue).start();//запуск метод run(класс Queue) в отдельном потоке
         this.rejectQueue = new RejectQueue();
         this.memoryScheduler = new MemoryScheduler();
         this.shutDown = false;
@@ -25,17 +26,20 @@ public class Scheduler implements Runnable {
     private void initial(){
         MemoryScheduler.initial();
         queue.add("OS",1);
-        generateProcess(7);
 
     }
 
     public void generateProcess(final int N){
+        //создание  N-ого колличества процессов
         for (int i =0 ;i<N;i++){
             Process process = new Process();
             MemoryBlock mb = MemoryScheduler.findFreeBlock(process.getMemory());
+            //проверяет есть ли свободный блок памяти для процесса
             if(mb.getStart() == 0 ){
+                //если нету - добавляет в очередь отказов
                 rejectQueue.add(process);
             }else{
+                //если есть в очередь на обработку процессором
                 queue.add(process,mb);
             }
         }
@@ -51,6 +55,21 @@ public class Scheduler implements Runnable {
     }
 
     private void giveCPUWork() throws InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!shutDown){
+                    generateProcess(CPU.getCores().length);
+                    try {
+                        Thread.sleep(Configuration.cpuSleapField*5);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                }
+
+        });
+        thread.start();
         while (!shutDown){
             int coresFreeNumber = 0;
             for (Core core:cpu.getCores()) {
@@ -70,25 +89,21 @@ public class Scheduler implements Runnable {
             if (shutDown){
                 break;
             }
-            Thread.sleep(20000);
-            if (shutDown){
-                break;
-            }
-            generateProcess(CPU.getCores().length);
             if(rejectQueue.isNeadDefragmentation()){
                 MemoryScheduler.defragmentationStart();
             }
+            Thread.sleep(1000);
         }
         for (Core core:CPU.getCores()) {
             core.setProcessID(0);
             core.isFree(true);
         }
-        ClockGenerator.shutDown();
-        ProcessQueue.shutDown();
+        ClockGenerator.setShutDown(shutDown);
+        ProcessQueue.setShutDown(shutDown);
     }
 
-    public void shutDown(){
-        this.shutDown = true;
+    public static void setShutDown(boolean value){
+        shutDown = value;
     }
 
     @Override

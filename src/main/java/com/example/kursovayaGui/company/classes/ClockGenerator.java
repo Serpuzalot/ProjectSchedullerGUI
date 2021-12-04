@@ -16,8 +16,8 @@ public class ClockGenerator implements Runnable {
         return time;
     }
 
-    public static void shutDown(){
-        shutDown = true;
+    public static void setShutDown(boolean value){
+        shutDown = value;
     }
 
     @Override

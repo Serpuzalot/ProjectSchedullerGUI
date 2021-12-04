@@ -12,6 +12,7 @@ public class CPU implements Runnable  {
         for (int i=0;i<cores.length;i++){
             cores[i] = new Core(i);
         }
+        //изначальное добавление ядер
     }
 
     public static Core[] getCores() {
@@ -30,9 +31,11 @@ public class CPU implements Runnable  {
 
     @Override
     public void run() {
+        //метод запускаемый в отдельном потоке
         if(process.getId() != 0){
             for (Core core:cores) {
                 if(core.isFree() == true){
+                    //занимает ядро процессом
                     core.isFree(false);
                     core.setProcessID(process.getId());
                     core.setBurstTime(process.getBurstTime());
@@ -43,12 +46,14 @@ public class CPU implements Runnable  {
             for (int i =0;i<process.getBurstTime();i++){
                 try {
                     incBurstTime(process.getId());
-                    Thread.sleep(1000);
+                    Thread.sleep(Configuration.cpuSleapField);
+                    //выполняется работа процесса на ядре
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-
+            //освобождение пблока памяти от процесса
+            //и изменение у процесса состояние на завершенный
             MemoryScheduler.releaseMemoryBlock(process.getId());
             ProcessQueue.changeState(process.getId(),State.Finished);
 

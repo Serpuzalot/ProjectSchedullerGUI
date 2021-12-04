@@ -30,6 +30,8 @@ public class RejectQueue implements Queue {
     }
 
     public boolean isNeadDefragmentation(){
+        //проверяет нужна ли дефрагментация
+        //дефрагментация нужна если очередь отказов увелисилась на 15 процессов
         if(queue.size() - queueLastSize > 15){
             queueLastSize = queue.size();
             return  true;
@@ -40,22 +42,6 @@ public class RejectQueue implements Queue {
 
     public ArrayList getRejectQueue(){
         return queue;
-    }
-
-
-    @Override
-    public void add(Process process, MemoryBlock mb) {
-
-    }
-
-    @Override
-    public void add(String name, int id) {
-
-    }
-
-    @Override
-    public Process getHighPriorityProcess() {
-        return null;
     }
 
     @Override

@@ -8,6 +8,9 @@ public class MemoryScheduler {
     private static String lastDefragmentationEnd;
     public static void initial(){
         memoryBlocks = new ArrayList<>();
+        //добавление двух изначальных блоков памяти
+        //1- под ОС
+        //2- под свободное пространство
         MemoryBlock block = new MemoryBlock(0,Configuration.osMemoryVolume,1);
         MemoryBlock freeSpace = new MemoryBlock(Configuration.osMemoryVolume,Configuration.memoryVolume,0);
         memoryBlocks.add(block);
@@ -18,6 +21,9 @@ public class MemoryScheduler {
     }
 
     public static boolean findMostSuitableAvailableMemoryBlock(int memoryVolume,int processID,MemoryBlock nededBlock){
+        //ищет наиболее подходящий по размеру блок памяти
+        //по варианту наиболее подходящий
+        //исчет блок который меньше всего,приэтом вмещает в себя процесс
         memoryBlocks.sort(MemoryBlock.byEnd);
         for(var block : memoryBlocks){
             synchronized (memoryBlocks){
@@ -29,10 +35,12 @@ public class MemoryScheduler {
             }
         }
         ocupyMemoryBlock(nededBlock,memoryVolume,processID);
+        //занимает выбранный блок памяти процессом
         return true;
     }
 
     public static MemoryBlock findFreeBlock(int memoryVolume){
+        //ищет первый свободнй блок памяти
         synchronized (memoryBlocks){
             for (var mb : memoryBlocks){
                 if(mb.getEnd() - mb.getStart() >= memoryVolume && mb.getProcessId() <=0){
@@ -45,6 +53,9 @@ public class MemoryScheduler {
     }
 
     private static void ocupyMemoryBlock(MemoryBlock block , int memoryVolume , int processID){
+        //занимает блок памяти
+        //проверяет если помещения процесса в блок памяти,в блоке оставется еще место
+        //то создается вместо одного блока,два
         for(var el : memoryBlocks){
             if(block.equals(el)){
                 if(block.getStart()+memoryVolume == block.getEnd()){
@@ -61,6 +72,7 @@ public class MemoryScheduler {
     }
 
     public static void releaseMemoryBlock(int id){
+        //освобождение от процесса блока памяти
         for (var block : memoryBlocks){
             synchronized (memoryBlocks){
                 if(block.getProcessId() == id){
