@@ -73,14 +73,14 @@ public class MemoryScheduler {
 
     public static void releaseMemoryBlock(int id){
         //освобождение от процесса блока памяти
-        for (var block : memoryBlocks){
-            synchronized (memoryBlocks){
-                if(block.getProcessId() == id){
+        synchronized (memoryBlocks) {
+            for (var block : memoryBlocks) {
+                if (block.getProcessId() == id) {
                     block.setProcessId(-1);
                     break;
                 }
-            }
 
+            }
         }
     }
 

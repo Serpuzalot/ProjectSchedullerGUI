@@ -1,19 +1,20 @@
 package com.example.kursovayaGui.company.classes;
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Scheduler implements Runnable {
     ProcessQueue queue;
     RejectQueue rejectQueue;
     CPU cpu;
     MemoryScheduler memoryScheduler;
-     static volatile boolean shutDown;
+    ClockGenerator clockGenerator;
+    static volatile boolean shutDown;
 
     public Scheduler(final int cpuCoresNumber,int memoryVolume) {
         new Thread(new ClockGenerator()).start();
         //запуск в отдельном потоке счетчика,отсчитывает секунды со старта программы
         this.queue = new ProcessQueue();
-        new Thread(queue).start();//запуск метод run(класс Queue) в отдельном потоке
         this.rejectQueue = new RejectQueue();
         this.memoryScheduler = new MemoryScheduler();
         this.shutDown = false;
@@ -48,6 +49,10 @@ public class Scheduler implements Runnable {
     @Override
     public void run()  {
         try {
+            ProcessQueue.setShutDown(false);
+            ClockGenerator.setShutDown(false);
+            new Thread(queue).start();//запуск метод run(класс Queue) в отдельном потоке
+            new Thread(clockGenerator).start();
             giveCPUWork();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -59,9 +64,9 @@ public class Scheduler implements Runnable {
             @Override
             public void run() {
                 while (!shutDown){
-                    generateProcess(CPU.getCores().length);
+                    generateProcess(CPU.getCores().length+2);
                     try {
-                        Thread.sleep(Configuration.cpuSleapField*5);
+                        Thread.sleep(((Configuration.cpuSleapField*Configuration.maxProcessWorked)*2)/Configuration.coreQuantity/2);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -93,10 +98,6 @@ public class Scheduler implements Runnable {
                 MemoryScheduler.defragmentationStart();
             }
             Thread.sleep(1000);
-        }
-        for (Core core:CPU.getCores()) {
-            core.setProcessID(0);
-            core.isFree(true);
         }
         ClockGenerator.setShutDown(shutDown);
         ProcessQueue.setShutDown(shutDown);

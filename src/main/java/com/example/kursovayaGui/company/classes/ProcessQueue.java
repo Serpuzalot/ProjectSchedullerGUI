@@ -91,7 +91,7 @@ public class ProcessQueue implements Queue,Runnable {
             for (Process process: queue) {
                 synchronized (queue){
                     if(process.getState() == State.Ready){
-                        if(ClockGenerator.getTime() - process.getTimeIn() > 40 &&  process.getPriority() > 2){
+                        if(ClockGenerator.getTime() - process.getTimeIn() > Configuration.cpuSleapField % 10 &&  process.getPriority() > 2){
                             process.setPriority(Math.round(process.getPriority()/2));
                         }
                     }

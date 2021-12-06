@@ -10,19 +10,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        /*Parent root = FXMLLoader.load(getClass().getResource("schedullerView.fxml"));
-
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
-        stage.setTitle("Scheduler");
-        stage.setScene(scene);
-        stage.show();*/
         Parent root = FXMLLoader.load(getClass().getResource("configurationView.fxml"));
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
+        scene.getStylesheets().add(getClass().getResource("configurationStyle.css").toExternalForm());
         stage.setTitle("Configuration");
         stage.setScene(scene);
         stage.show();

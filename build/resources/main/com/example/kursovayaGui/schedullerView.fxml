@@ -4,42 +4,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane prefWidth="1000" prefHeight="600" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kursovayaGui.Controller" >
+<GridPane prefHeight="600" prefWidth="1050" maxWidth="1100"  xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kursovayaGui.Controller">
     <columnConstraints>
-        <ColumnConstraints prefWidth="200" maxWidth="200" />
-        <ColumnConstraints prefWidth="400" maxWidth="400" />
-        <ColumnConstraints prefWidth="400" maxWidth="400" />
+        <ColumnConstraints maxWidth="300" prefWidth="240" />
+        <ColumnConstraints maxWidth="400" prefWidth="400" />
+        <ColumnConstraints maxWidth="400" prefWidth="400" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints prefHeight="100" maxHeight="120" />
-        <RowConstraints prefHeight="100" maxHeight="120" />
-        <RowConstraints prefHeight="100" maxHeight="140" />
-        <RowConstraints prefHeight="100" maxHeight="140" />
-        <RowConstraints prefHeight="50" maxHeight="80" />
+        <RowConstraints maxHeight="120" prefHeight="100" />
+        <RowConstraints maxHeight="120" prefHeight="100" />
+        <RowConstraints maxHeight="140" prefHeight="100" />
+        <RowConstraints maxHeight="140" prefHeight="100" />
+        <RowConstraints maxHeight="80" prefHeight="50" />
     </rowConstraints>
 
-    <Button fx:id="queueBtn" prefWidth="180" GridPane.rowIndex="0" GridPane.columnIndex="0" onAction="#handleQueueBtnAction" >
+    <Button fx:id="queueBtn" onAction="#handleQueueBtnAction" prefWidth="180" GridPane.columnIndex="0" GridPane.rowIndex="0">
         Очередь на процессор
-        <GridPane.margin> <Insets left="5"></Insets></GridPane.margin></Button>
-    <Button fx:id="rejectQueueBtn" prefWidth="180" GridPane.rowIndex="1" GridPane.columnIndex="0" onAction="#handleRejectQueueBtnAction" >
+        <GridPane.halignment>center</GridPane.halignment>
+        <GridPane.margin> <Insets left="5" /></GridPane.margin></Button>
+    <Button fx:id="rejectQueueBtn" onAction="#handleRejectQueueBtnAction" prefWidth="180" GridPane.columnIndex="0" GridPane.rowIndex="1">
         Очередь отказов
-        <GridPane.margin><Insets left="5"></Insets></GridPane.margin></Button>
-    <Button fx:id="finishedQueueBtn" prefWidth="180" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#handlefinishedQueueBtnAction" >
+        <GridPane.halignment>center</GridPane.halignment>
+        <GridPane.margin><Insets left="5" /></GridPane.margin></Button>
+    <Button fx:id="finishedQueueBtn" onAction="#handlefinishedQueueBtnAction" prefWidth="180" GridPane.columnIndex="0" GridPane.rowIndex="2">
         Законченные процессы
-        <GridPane.margin><Insets left="5"></Insets></GridPane.margin></Button>
-    <Button fx:id="memoryBlocksBtn" prefWidth="180" GridPane.rowIndex="3" GridPane.columnIndex="0" onAction="#handleMemoryBlocksBtnAction" >
+        <GridPane.halignment>center</GridPane.halignment>
+        <GridPane.margin><Insets left="5" /></GridPane.margin></Button>
+    <Button fx:id="memoryBlocksBtn" onAction="#handleMemoryBlocksBtnAction" prefWidth="180" GridPane.columnIndex="0" GridPane.rowIndex="3">
         Блоки памяти
-        <GridPane.margin><Insets left="5"></Insets></GridPane.margin></Button>
-    <Button fx:id="startBtn" prefWidth="50" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.halignment="LEFT" onAction="#handleStartBtnAction">
+        <GridPane.halignment>center</GridPane.halignment>
+        <GridPane.margin><Insets left="5" /></GridPane.margin></Button>
+    <Button fx:id="startBtn" onAction="#handleStartBtnAction" prefWidth="70" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="4">
         Старт
-        <GridPane.margin><Insets left="5"></Insets></GridPane.margin></Button>
-    <Button fx:id="stopBtn" prefWidth="50" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.halignment="CENTER" onAction="#handleStopBtnAction" >
+        <GridPane.margin><Insets left="5"/></GridPane.margin></Button>
+    <Button fx:id="stopBtn" onAction="#handleStopBtnAction" prefWidth="70" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4">
         Стоп</Button>
-    <Button fx:id="pauseBtn" prefWidth="50" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.halignment="RIGHT" onAction="#handlePauseBtnAction" >
+    <Button fx:id="pauseBtn" onAction="#handlePauseBtnAction" prefWidth="70" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
         Пауза
-        <GridPane.margin><Insets right="5"></Insets></GridPane.margin></Button>
+        <GridPane.margin><Insets right="5" /></GridPane.margin></Button>
 
-    <GridPane GridPane.rowIndex="0" GridPane.rowSpan="2" GridPane.columnIndex="1" GridPane.columnSpan="2" >
+    <GridPane GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
         <rowConstraints>
             <RowConstraints maxHeight="25" />
             <RowConstraints maxHeight="25" />
@@ -51,15 +55,15 @@
             <ColumnConstraints prefWidth="200" />
             <ColumnConstraints prefWidth="200" />
         </columnConstraints>
-        <Label GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" >CPU:</Label>
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER" >ИД</Label>
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" >Свободен</Label>
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="2" GridPane.halignment="CENTER" >Ид процесса</Label>
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="3" GridPane.halignment="CENTER" >Время работы</Label>
-        <ScrollPane GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="4">
-            <GridPane fx:id="cpuField" prefWidth="900" prefHeight="190" >
+        <Label GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="0">CPU:</Label>
+        <Label GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">ИД</Label>
+        <Label GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">Свободен</Label>
+        <Label GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">Ид процесса</Label>
+        <Label GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">Время работы</Label>
+        <ScrollPane GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="2">
+            <GridPane fx:id="cpuField" prefHeight="190" prefWidth="900">
                 <rowConstraints>
-                    <RowConstraints maxHeight="25"/>
+                    <RowConstraints maxHeight="25" />
                 </rowConstraints>
                 <columnConstraints>
                     <ColumnConstraints prefWidth="200" />
@@ -67,16 +71,16 @@
                     <ColumnConstraints prefWidth="200" />
                     <ColumnConstraints prefWidth="200" />
                 </columnConstraints>
-                <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="4" visible="false"></Label>
+                <Label visible="false" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="0" />
             </GridPane>
-        </ScrollPane >
+        </ScrollPane>
     </GridPane>
 
-    <GridPane GridPane.rowIndex="2" GridPane.rowSpan="3" GridPane.columnIndex="1" GridPane.columnSpan="2"  >
+    <GridPane GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="3">
         <rowConstraints>
             <RowConstraints maxHeight="25" />
             <RowConstraints maxHeight="25" />
-            <RowConstraints maxHeight="310" />
+            <RowConstraints maxHeight="310" fx:id="row" />
         </rowConstraints>
         <columnConstraints>
             <ColumnConstraints prefWidth="114" />
@@ -87,21 +91,21 @@
             <ColumnConstraints prefWidth="114" />
             <ColumnConstraints prefWidth="114" />
         </columnConstraints>
-        <Label fx:id="fieldTitle" GridPane.columnIndex="0" GridPane.columnSpan="7"  GridPane.rowIndex="0" GridPane.halignment="CENTER" >
-            <GridPane.margin><Insets top="10"></Insets></GridPane.margin>
+        <Label fx:id="fieldTitle" GridPane.columnIndex="0" GridPane.columnSpan="7" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+            <GridPane.margin><Insets top="10" /></GridPane.margin>
         </Label>
-        <Label fx:id="subtitleID" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER">ИД</Label>
-        <Label fx:id="subtitleName" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="CENTER">Имя</Label>
-        <Label fx:id="subtitlePriority" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.halignment="CENTER">Приоритет</Label>
-        <Label fx:id="subtitleMemory" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.halignment="CENTER">Память</Label>
-        <Label fx:id="subtitleTimeIn" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.halignment="CENTER">Время прибытия</Label>
-        <Label fx:id="subtitleBurstTime" GridPane.columnIndex="5" GridPane.rowIndex="1" GridPane.halignment="CENTER">Время работы</Label>
-        <Label fx:id="subtitleState" GridPane.columnIndex="6" GridPane.rowIndex="1" GridPane.halignment="CENTER">Статус</Label>
+        <Label fx:id="subtitleID" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">ИД</Label>
+        <Label fx:id="subtitleName" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">Имя</Label>
+        <Label fx:id="subtitlePriority" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">Приоритет</Label>
+        <Label fx:id="subtitleMemory" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">Память</Label>
+        <Label fx:id="subtitleTimeIn" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1">Время прибытия</Label>
+        <Label fx:id="subtitleBurstTime" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1">Время работы</Label>
+        <Label fx:id="subtitleState" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1">Статус</Label>
 
-        <ScrollPane GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="7" prefHeight="310" prefWidth="900">
-            <GridPane fx:id="contentField" >
+        <ScrollPane prefHeight="310" prefWidth="900" GridPane.columnIndex="0" GridPane.columnSpan="7" GridPane.rowIndex="2">
+            <GridPane fx:id="contentField">
                 <rowConstraints>
-                    <RowConstraints/>
+                    <RowConstraints />
                 </rowConstraints>
                 <columnConstraints>
                     <ColumnConstraints prefWidth="114" />
